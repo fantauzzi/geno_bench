@@ -27,6 +27,12 @@ PLOIDY=1 # DON'T FORGET to set this correctly!
 start_time=$(get_timestamp)
 date
 
+echo
+echo "Experiment $ACC"
+echo "Reference genome $REF_ACC"
+echo "Ploidy is set to $PLOIDY"
+echo
+echo "Downloading reads"
 # prefetch is way faster than just fastq-dump or fasterq-dump directly from remote
 prefetch -v $ACC
 # Convert the downloaded files to FASTQ
@@ -45,7 +51,7 @@ echo
 echo "Compressing FASTQ files"
 # find . -maxdepth 1 -name "$ACC*.fastq" -print0 | xargs -0 -P "$THREADS" -I {} gzip {}
 for file in ${ACC}*.fastq; do
-    pbzip2 -p$THREADS -m2000 -v "$file"
+  pbzip2 -p$THREADS -m2000 -v "$file"
 done
 
 # Donwload the reference genome
@@ -63,7 +69,7 @@ READS1=$(ls "$ACC"*_1.fastq.bz2 | head -n 1)
 READS2=$(ls "$ACC"*_2.fastq.bz2 | head -n 1)
 
 # Index the reference genome to use with IGV
-samtools faidx  $REF_FILE
+samtools faidx $REF_FILE
 
 echo
 echo "Indexing the reference for the aligner"
@@ -81,11 +87,8 @@ echo "Calling variants"
 date
 bcftools mpileup --threads $THREADS -O z -f $REF_FILE $ACC.bowtie2.bam | bcftools call --threads $THREADS --ploidy $PLOIDY -m -O z -o $ACC.bcftools.vcf
 
-
-
 echo
 date
 end_time=$(get_timestamp)
 elapsed_time=$((end_time - start_time))
 echo "Time taken (elapsed): ${elapsed_time} sec."
-

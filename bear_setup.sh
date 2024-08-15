@@ -1,6 +1,5 @@
-module load  Bowtie2
-module load  SAMtools/1.12-GCC-10.3.0
-
+module load Bowtie2
+module load SAMtools/1.12-GCC-10.3.0
 
 cd ~/Downloads || exit
 wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/3.1.1/sratoolkit.3.1.1-ubuntu64.tar.gz
