@@ -9,17 +9,15 @@ get_timestamp() {
 THREADS=16
 
 # Accession number for the run that produced the reads
-# ACC=ERR9466181 # Drosophila melanogaster
-# ACC=SRR30202075 # Saccharomyces cerevisiae
-# ACC=SRR17858636 # Encephalitozoon cuniculi
-# ACC=SRR12007531 # Utricularia gibba
-ACC=SRR5512131 #  Shigella flexneri 2a str. 301
+# ACC=ERR9466181 # Drosophila melanogaster -longest time
+# ACC=SRR30202075 # Saccharomyces cerevisiae -long time
+# ACC=SRR17858636 # Encephalitozoon cuniculi -short time
+ACC=SRR5512131 #  Shigella flexneri 2a str. 301 -shortest time
 
 # Accession number for the reference genome (NCBI datatbase)
 # REF_ACC=GCF_000001215.4 # Drosophila melanogaster
 # REF_ACC=GCF_000146045.2  # Saccharomyces cerevisiae
 # REF_ACC=GCF_000091225.2 # Encephalitozoon cuniculi
-# REF_ACC=GCA_002189035.1 # Utricularia gibba
 REF_ACC=GCF_000006925.2 #  Shigella flexneri 2a str. 301
 
 PLOIDY=1 # DON'T FORGET to set this correctly!
@@ -72,23 +70,26 @@ READS2=$(ls "$ACC"*_2.fastq.bz2 | head -n 1)
 samtools faidx $REF_FILE
 
 echo
-echo "Indexing the reference for the aligner"
 date
+echo "Indexing the reference for the aligner"
 bowtie2-build --threads $THREADS -q $REF_FILE $REF_FILE
 
 echo
-echo "Running the aligner"
 date
+echo "Running the aligner"
 # bowtie2 --threads $THREADS --reorder -x $REF_FILE -1 $READS1 -2 $READS2 | samtools view --threads $THREADS -b > $ACC.bowtie2.bam
 bowtie2 --threads $THREADS --reorder -x $REF_FILE -1 $READS1 -2 $READS2 | samtools sort --threads $THREADS -o $ACC.bowtie2.bam
 
 echo
-echo "Calling variants"
 date
+echo "Calling variants"
 bcftools mpileup --threads $THREADS -O z -f $REF_FILE $ACC.bowtie2.bam | bcftools call --threads $THREADS --ploidy $PLOIDY -m -O z -o $ACC.bcftools.vcf
 
 echo
 date
 end_time=$(get_timestamp)
 elapsed_time=$((end_time - start_time))
+echo
 echo "Time taken (elapsed): ${elapsed_time} sec."
+
+# TODO now do it with GATK

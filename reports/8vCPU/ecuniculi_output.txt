@@ -1,0 +1,60 @@
+Thu Aug 15 18:19:01 UTC 2024
+
+Experiment SRR17858636
+Reference genome GCF_000091225.2
+Ploidy is set to 1
+
+Downloading reads
+2024-08-15T18:19:01 prefetch.3.1.1: 1) Resolving 'SRR17858636'...
+2024-08-15T18:19:01 prefetch.3.1.1: 'tools/ascp/disabled': not found in configuration
+2024-08-15T18:19:01 prefetch.3.1.1: Checking 'ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: 'ascp': not found
+2024-08-15T18:19:01 prefetch.3.1.1: Checking 'ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: 'ascp': not found
+2024-08-15T18:19:01 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-15T18:19:01 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-15T18:19:01 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-15T18:19:01 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-15T18:19:01 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-15T18:19:01 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-15T18:19:01 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-15T18:19:02 prefetch.3.1.1: Current preference is set to retrieve SRA Normalized Format files with full base quality scores
+2024-08-15T18:19:02 prefetch.3.1.1: 1) Downloading 'SRR17858636'...
+2024-08-15T18:19:02 prefetch.3.1.1:  SRA Normalized Format file is being retrieved
+2024-08-15T18:19:02 prefetch.3.1.1:  Downloading via HTTPS...
+2024-08-15T18:19:16 prefetch.3.1.1:  HTTPS download succeed
+2024-08-15T18:19:17 prefetch.3.1.1:  'SRR17858636' is valid: 318430721 bytes were streamed from 318419380
+2024-08-15T18:19:17 prefetch.3.1.1: 1) 'SRR17858636' was downloaded successfully
+2024-08-15T18:19:17 prefetch.3.1.1: 'SRR17858636' has 0 unresolved dependencies
+
+Converting downloaded reads to FASTQ format
+
+file                 format  type   num_seqs      sum_len  min_len  avg_len  max_len
+SRR17858636_1.fastq  FASTQ   DNA   3,021,173  456,197,123      151      151      151
+SRR17858636_2.fastq  FASTQ   DNA   3,021,173  456,197,123      151      151      151
+
+Compressing FASTQ files
+
+Obtaining the reference genome (if not already here)
+Archive:  ncbi_dataset.zip
+  inflating: unzipped/README.md      
+  inflating: unzipped/ncbi_dataset/data/assembly_data_report.jsonl  
+  inflating: unzipped/ncbi_dataset/data/GCF_000091225.2/GCF_000091225.2_ASM9122v2_genomic.fna  
+  inflating: unzipped/ncbi_dataset/data/dataset_catalog.json  
+
+Indexing the reference for the aligner
+Thu Aug 15 18:19:43 UTC 2024
+
+Running the aligner
+Thu Aug 15 18:19:44 UTC 2024
+
+Calling variants
+Thu Aug 15 18:23:24 UTC 2024
+
+Thu Aug 15 18:24:42 UTC 2024
+Time taken (elapsed): 341 sec.

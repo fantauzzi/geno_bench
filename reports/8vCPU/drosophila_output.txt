@@ -1,0 +1,61 @@
+Thu Aug 15 19:35:08 UTC 2024
+
+Experiment ERR9466181
+Reference genome GCF_000001215.4
+Ploidy is set to 1
+
+Downloading reads
+2024-08-15T19:35:08 prefetch.3.1.1: 1) Resolving 'ERR9466181'...
+2024-08-15T19:35:08 prefetch.3.1.1: 'tools/ascp/disabled': not found in configuration
+2024-08-15T19:35:08 prefetch.3.1.1: Checking 'ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: 'ascp': not found
+2024-08-15T19:35:08 prefetch.3.1.1: Checking 'ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: 'ascp': not found
+2024-08-15T19:35:08 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-15T19:35:08 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-15T19:35:08 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-15T19:35:08 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-15T19:35:08 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-15T19:35:08 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-15T19:35:08 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-15T19:35:09 prefetch.3.1.1: Current preference is set to retrieve SRA Normalized Format files with full base quality scores
+2024-08-15T19:35:09 prefetch.3.1.1: 1) Downloading 'ERR9466181'...
+2024-08-15T19:35:09 prefetch.3.1.1:  SRA Normalized Format file is being retrieved
+2024-08-15T19:35:09 prefetch.3.1.1:  Downloading via HTTPS...
+2024-08-15T19:37:02 prefetch.3.1.1:  HTTPS download succeed
+2024-08-15T19:37:02 prefetch.3.1.1:   verifying 'ERR9466181'...
+2024-08-15T19:37:06 prefetch.3.1.1:  'ERR9466181' is valid: 2398170025 bytes were streamed from 2398168119
+2024-08-15T19:37:06 prefetch.3.1.1: 1) 'ERR9466181' was downloaded successfully
+2024-08-15T19:37:06 prefetch.3.1.1: 'ERR9466181' has 0 unresolved dependencies
+
+Converting downloaded reads to FASTQ format
+
+file                format  type    num_seqs        sum_len  min_len  avg_len  max_len
+ERR9466181_1.fastq  FASTQ   DNA   24,826,337  3,616,058,963       15    145.7      151
+ERR9466181_2.fastq  FASTQ   DNA   24,826,337  3,607,008,118       15    145.3      151
+
+Compressing FASTQ files
+
+Obtaining the reference genome (if not already here)
+Archive:  ncbi_dataset.zip
+  inflating: unzipped/README.md      
+  inflating: unzipped/ncbi_dataset/data/assembly_data_report.jsonl  
+  inflating: unzipped/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna  
+  inflating: unzipped/ncbi_dataset/data/dataset_catalog.json  
+
+Indexing the reference for the aligner
+Thu Aug 15 19:42:37 UTC 2024
+
+Running the aligner
+Thu Aug 15 19:43:46 UTC 2024
+
+Calling variants
+Thu Aug 15 20:27:22 UTC 2024
+
+Thu Aug 15 20:50:09 UTC 2024
+Time taken (elapsed): 4501 sec.

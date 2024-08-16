@@ -1,0 +1,127 @@
+fanta@geno-armageddon:~/datasets/shigella$ sh ~/workspace/geno_bench/benchmark.sh 
+Thu Aug 15 18:11:51 UTC 2024
+
+Experiment SRR5512131
+Reference genome GCF_000006925.2
+Ploidy is set to 1
+
+Downloading reads
+2024-08-15T18:11:51 prefetch.3.1.1: 1) Resolving 'SRR5512131'...
+2024-08-15T18:11:51 prefetch.3.1.1: 'tools/ascp/disabled': not found in configuration
+2024-08-15T18:11:51 prefetch.3.1.1: Checking 'ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: 'ascp': not found
+2024-08-15T18:11:51 prefetch.3.1.1: Checking 'ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: 'ascp': not found
+2024-08-15T18:11:51 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-15T18:11:51 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-15T18:11:51 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-15T18:11:51 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-15T18:11:51 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-15T18:11:51 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-15T18:11:51 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-15T18:11:52 prefetch.3.1.1: Current preference is set to retrieve SRA Normalized Format files with full base quality scores
+2024-08-15T18:11:52 prefetch.3.1.1: 1) Downloading 'SRR5512131'...
+2024-08-15T18:11:52 prefetch.3.1.1:  SRA Normalized Format file is being retrieved
+2024-08-15T18:11:52 prefetch.3.1.1:  Downloading via HTTPS...
+2024-08-15T18:12:07 prefetch.3.1.1:  HTTPS download succeed
+2024-08-15T18:12:08 prefetch.3.1.1:  'SRR5512131' is valid: 346670667 bytes were streamed from 346670414
+2024-08-15T18:12:08 prefetch.3.1.1: 1) 'SRR5512131' was downloaded successfully
+
+Converting downloaded reads to FASTQ format
+Preference setting is: Prefer SRA Normalized Format files with full base quality scores if available.
+SRR5512131 is an SRA Normalized Format file with full base quality scores.
+spots read      : 2,794,445
+reads read      : 5,588,890
+reads written   : 5,588,890
+
+file                format  type   num_seqs      sum_len  min_len  avg_len  max_len
+SRR5512131_1.fastq  FASTQ   DNA   2,794,445  251,500,050       90       90       90
+SRR5512131_2.fastq  FASTQ   DNA   2,794,445  251,500,050       90       90       90
+
+Compressing FASTQ files
+Parallel BZIP2 v1.1.13 [Dec 18, 2015]
+By: Jeff Gilchrist [http://compression.ca]
+Major contributions: Yavor Nikolov [http://javornikolov.wordpress.com]
+Uses libbzip2 by Julian Seward
+
+         # CPUs: 8
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 2000 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: SRR5512131_1.fastq
+    Output Name: SRR5512131_1.fastq.bz2
+
+     Input Size: 844425046 bytes
+Compressing data...
+    Output Size: 192289568 bytes
+-------------------------------------------
+
+     Wall Clock: 9.703886 seconds
+Parallel BZIP2 v1.1.13 [Dec 18, 2015]
+By: Jeff Gilchrist [http://compression.ca]
+Major contributions: Yavor Nikolov [http://javornikolov.wordpress.com]
+Uses libbzip2 by Julian Seward
+
+         # CPUs: 8
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 2000 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: SRR5512131_2.fastq
+    Output Name: SRR5512131_2.fastq.bz2
+
+     Input Size: 844425046 bytes
+Compressing data...
+    Output Size: 199576633 bytes
+-------------------------------------------
+
+     Wall Clock: 9.727299 seconds
+
+Obtaining the reference genome (if not already here)
+Collecting 1 genome record [================================================] 100% 1/1
+Downloading: ncbi_dataset.zip    1.43MB valid zip structure -- files not checked
+Validating package [================================================] 100% 4/4
+Archive:  ncbi_dataset.zip
+  inflating: unzipped/README.md      
+  inflating: unzipped/ncbi_dataset/data/assembly_data_report.jsonl  
+  inflating: unzipped/ncbi_dataset/data/GCF_000006925.2/GCF_000006925.2_ASM692v2_genomic.fna  
+  inflating: unzipped/ncbi_dataset/data/dataset_catalog.json  
+
+Indexing the reference for the aligner
+Thu Aug 15 18:12:33 UTC 2024
+
+Running the aligner
+Thu Aug 15 18:12:35 UTC 2024
+2794445 reads; of these:
+  2794445 (100.00%) were paired; of these:
+    128835 (4.61%) aligned concordantly 0 times
+    2483369 (88.87%) aligned concordantly exactly 1 time
+    182241 (6.52%) aligned concordantly >1 times
+    ----
+    128835 pairs aligned concordantly 0 times; of these:
+      30997 (24.06%) aligned discordantly 1 time
+    ----
+    97838 pairs aligned 0 times concordantly or discordantly; of these:
+      195676 mates make up the pairs; of these:
+        169919 (86.84%) aligned 0 times
+        7618 (3.89%) aligned exactly 1 time
+        18139 (9.27%) aligned >1 times
+96.96% overall alignment rate
+[bam_sort_core] merging from 0 files and 8 in-memory blocks...
+
+Calling variants
+Thu Aug 15 18:15:38 UTC 2024
+[mpileup] 1 samples in 1 input files
+[mpileup] maximum number of reads per input file set to -d 250
+
+Thu Aug 15 18:16:28 UTC 2024
+Time taken (elapsed): 277 sec.
+
