@@ -9,18 +9,18 @@ get_timestamp() {
 THREADS=$(nproc --all)
 
 # Accession number for the run that produced the reads
-# ACC=ERR9466181 # Drosophila melanogaster -longest time
-# ACC=SRR30202075 # Saccharomyces cerevisiae -long time
+ACC=ERR9466181 # Drosophila melanogaster -longest time
+# ACC=SRR29972059 # Saccharomyces cerevisiae -long time
 # ACC=SRR17858636 # Encephalitozoon cuniculi -short time
-ACC=SRR5512131 #  Shigella flexneri 2a str. 301 -shortest time
+# ACC=SRR5512131 #  Shigella flexneri 2a str. 301 -shortest time
 
 # Accession number for the reference genome (NCBI datatbase)
-# REF_ACC=GCF_000001215.4 # Drosophila melanogaster
+REF_ACC=GCF_000001215.4 # Drosophila melanogaster
 # REF_ACC=GCF_000146045.2  # Saccharomyces cerevisiae
 # REF_ACC=GCF_000091225.2 # Encephalitozoon cuniculi
-REF_ACC=GCF_000006925.2 #  Shigella flexneri 2a str. 301
+# REF_ACC=GCF_000006925.2 #  Shigella flexneri 2a str. 301
 
-PLOIDY=1 # DON'T FORGET to set this correctly!
+PLOIDY=2 # DON'T FORGET to set this correctly!
 
 start_time=$(get_timestamp)
 date
@@ -81,6 +81,11 @@ date
 echo "Running the aligner"
 # bowtie2 --threads $THREADS --reorder -x $REF_FILE -1 $READS1 -2 $READS2 | samtools view --threads $THREADS -b > $ACC.bowtie2.bam
 bowtie2 --threads $THREADS --reorder -x $REF_FILE -1 $READS1 -2 $READS2 | samtools sort --threads $THREADS -o $ACC.bowtie2.bam
+
+echo
+date
+echo "Computing stats for the alignment"
+samtools flagstat -@ $THREADS $ACC.bowtie2.bam
 
 echo
 date

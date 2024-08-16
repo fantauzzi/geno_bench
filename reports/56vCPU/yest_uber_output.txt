@@ -1,0 +1,82 @@
+Fri Aug 16 09:15:49 UTC 2024
+
+Host name: geno-uber
+Experiment: SRR29972059
+Reference genome: GCF_000146045.2
+Ploidy is set to 1
+Number of threads: 56
+
+Downloading reads
+2024-08-16T09:15:49 prefetch.3.1.1: 1) Resolving 'SRR29972059'...
+2024-08-16T09:15:49 prefetch.3.1.1: 'tools/ascp/disabled': not found in configuration
+2024-08-16T09:15:49 prefetch.3.1.1: Checking 'ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: 'ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Checking 'ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: 'ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-16T09:15:49 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-16T09:15:49 prefetch.3.1.1: Current preference is set to retrieve SRA Normalized Format files with full base quality scores
+2024-08-16T09:15:50 prefetch.3.1.1: 1) Downloading 'SRR29972059'...
+2024-08-16T09:15:50 prefetch.3.1.1:  SRA Normalized Format file is being retrieved
+2024-08-16T09:15:50 prefetch.3.1.1:  Downloading via HTTPS...
+2024-08-16T09:16:16 prefetch.3.1.1:  HTTPS download succeed
+2024-08-16T09:16:17 prefetch.3.1.1:  'SRR29972059' is valid: 723444449 bytes were streamed from 723437401
+2024-08-16T09:16:17 prefetch.3.1.1: 1) 'SRR29972059' was downloaded successfully
+2024-08-16T09:16:17 prefetch.3.1.1: 'SRR29972059' has 0 unresolved dependencies
+
+Converting downloaded reads to FASTQ format
+
+file                 format  type   num_seqs        sum_len  min_len  avg_len  max_len
+SRR29972059_1.fastq  FASTQ   DNA   7,359,911  1,103,986,650      150      150      150
+SRR29972059_2.fastq  FASTQ   DNA   7,359,911  1,103,986,650      150      150      150
+
+Compressing FASTQ files
+
+Obtaining the reference genome (if not already here)
+Archive:  ncbi_dataset.zip
+  inflating: unzipped/README.md      
+  inflating: unzipped/ncbi_dataset/data/assembly_data_report.jsonl  
+  inflating: unzipped/ncbi_dataset/data/GCF_000146045.2/GCF_000146045.2_R64_genomic.fna  
+  inflating: unzipped/ncbi_dataset/data/dataset_catalog.json  
+
+Fri Aug 16 09:16:42 UTC 2024
+Indexing the reference for the aligner
+
+Fri Aug 16 09:16:49 UTC 2024
+Running the aligner
+
+Fri Aug 16 09:20:14 UTC 2024
+Computing stats
+14719822 + 0 in total (QC-passed reads + QC-failed reads)
+14719822 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+14593953 + 0 mapped (99.14% : N/A)
+14593953 + 0 primary mapped (99.14% : N/A)
+14719822 + 0 paired in sequencing
+7359911 + 0 read1
+7359911 + 0 read2
+13732506 + 0 properly paired (93.29% : N/A)
+14520008 + 0 with itself and mate mapped
+73945 + 0 singletons (0.50% : N/A)
+88600 + 0 with mate mapped to a different chr
+61329 + 0 with mate mapped to a different chr (mapQ>=5)
+
+Fri Aug 16 09:20:15 UTC 2024
+Calling variants
+
+Fri Aug 16 09:24:18 UTC 2024
+
+Time taken (elapsed): 509 sec.
