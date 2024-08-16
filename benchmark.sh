@@ -6,7 +6,7 @@ get_timestamp() {
   date +%s
 }
 
-THREADS=16
+THREADS=$(nproc --all)
 
 # Accession number for the run that produced the reads
 # ACC=ERR9466181 # Drosophila melanogaster -longest time
@@ -26,9 +26,11 @@ start_time=$(get_timestamp)
 date
 
 echo
-echo "Experiment $ACC"
-echo "Reference genome $REF_ACC"
+echo "Host name: $(hostname)"
+echo "Experiment: $ACC"
+echo "Reference genome: $REF_ACC"
 echo "Ploidy is set to $PLOIDY"
+echo "Number of threads: $THREADS"
 echo
 echo "Downloading reads"
 # prefetch is way faster than just fastq-dump or fasterq-dump directly from remote
