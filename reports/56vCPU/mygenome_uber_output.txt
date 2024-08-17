@@ -1,0 +1,40 @@
+Fri Aug 16 13:09:05 UTC 2024
+
+Host name: geno-uber
+Ploidy is set to 2
+Number of threads: 56
+Reference genome: /home/fanta/datasets/refs/hs38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz
+Reads, file 1: /home/fanta/datasets/mygenome/56001801068625_SA_L001_R1_001.fastq.gz
+Reads, file 2: /home/fanta/datasets/mygenome/56001801068625_SA_L001_R2_001.fastq.gz
+Output BAM file: /home/fanta/datasets/mygenome//56001801068625.bowtie2.bam
+
+Fri Aug 16 13:09:05 UTC 2024
+Indexing the reference for the aligner
+
+Fri Aug 16 13:31:09 UTC 2024
+Running the aligner
+
+Fri Aug 16 17:01:37 UTC 2024
+Computing stats for the alignment
+1731106330 + 0 in total (QC-passed reads + QC-failed reads)
+1731106330 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+1479553765 + 0 mapped (85.47% : N/A)
+1479553765 + 0 primary mapped (85.47% : N/A)
+1731106330 + 0 paired in sequencing
+865553165 + 0 read1
+865553165 + 0 read2
+1439158140 + 0 properly paired (83.14% : N/A)
+1473003852 + 0 with itself and mate mapped
+6549913 + 0 singletons (0.38% : N/A)
+21727914 + 0 with mate mapped to a different chr
+19469546 + 0 with mate mapped to a different chr (mapQ>=5)
+
+Fri Aug 16 17:08:29 UTC 2024
+
+Fri Aug 16 17:08:29 UTC 2024
+
+Time taken (elapsed): 14364 sec.

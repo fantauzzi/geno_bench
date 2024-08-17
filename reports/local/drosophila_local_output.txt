@@ -1,0 +1,83 @@
+ven 16 ago 2024, 11:29:12, CEST
+
+Host name: shodan
+Experiment: ERR9466181
+Reference genome: GCF_000001215.4
+Ploidy is set to 2
+Number of threads: 16
+
+Downloading reads
+2024-08-16T09:29:12 prefetch.3.1.1: 1) Resolving 'ERR9466181'...
+2024-08-16T09:29:12 prefetch.3.1.1: 'tools/ascp/disabled': not found in configuration
+2024-08-16T09:29:12 prefetch.3.1.1: Checking 'ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: 'ascp': not found
+2024-08-16T09:29:12 prefetch.3.1.1: Checking 'ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: 'ascp': not found
+2024-08-16T09:29:12 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-16T09:29:12 prefetch.3.1.1: Checking '/usr/bin/ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: '/usr/bin/ascp': not found
+2024-08-16T09:29:12 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-16T09:29:12 prefetch.3.1.1: Checking '/opt/aspera/bin/ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: '/opt/aspera/bin/ascp': not found
+2024-08-16T09:29:12 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-16T09:29:12 prefetch.3.1.1: Checking '/home/fanta/.aspera/connect/bin/ascp'
+2024-08-16T09:29:12 prefetch.3.1.1: '/home/fanta/.aspera/connect/bin/ascp': not found
+2024-08-16T09:29:13 prefetch.3.1.1: Current preference is set to retrieve SRA Normalized Format files with full base quality scores
+2024-08-16T09:29:13 prefetch.3.1.1: 1) Downloading 'ERR9466181'...
+2024-08-16T09:29:13 prefetch.3.1.1:  SRA Normalized Format file is being retrieved
+2024-08-16T09:29:13 prefetch.3.1.1:  Downloading via HTTPS...
+2024-08-16T09:31:25 prefetch.3.1.1:  HTTPS download succeed
+2024-08-16T09:31:25 prefetch.3.1.1:   verifying 'ERR9466181'...
+2024-08-16T09:31:28 prefetch.3.1.1:  'ERR9466181' is valid: 2398170025 bytes were streamed from 2398156926
+2024-08-16T09:31:28 prefetch.3.1.1: 1) 'ERR9466181' was downloaded successfully
+2024-08-16T09:31:28 prefetch.3.1.1: 'ERR9466181' has 0 unresolved dependencies
+
+Converting downloaded reads to FASTQ format
+
+file                format  type    num_seqs        sum_len  min_len  avg_len  max_len
+ERR9466181_1.fastq  FASTQ   DNA   24,826,337  3,616,058,963       15    145.7      151
+ERR9466181_2.fastq  FASTQ   DNA   24,826,337  3,607,008,118       15    145.3      151
+
+Compressing FASTQ files
+
+Obtaining the reference genome (if not already here)
+Archive:  ncbi_dataset.zip
+  inflating: unzipped/README.md      
+  inflating: unzipped/ncbi_dataset/data/assembly_data_report.jsonl  
+  inflating: unzipped/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna  
+  inflating: unzipped/ncbi_dataset/data/dataset_catalog.json  
+
+ven 16 ago 2024, 11:34:58, CEST
+Indexing the reference for the aligner
+
+ven 16 ago 2024, 11:35:57, CEST
+Running the aligner
+
+ven 16 ago 2024, 12:21:34, CEST
+Computing stats for the alignment
+49652674 + 0 in total (QC-passed reads + QC-failed reads)
+49652674 + 0 primary
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+0 + 0 primary duplicates
+41861779 + 0 mapped (84.31% : N/A)
+41861779 + 0 primary mapped (84.31% : N/A)
+49652674 + 0 paired in sequencing
+24826337 + 0 read1
+24826337 + 0 read2
+38143620 + 0 properly paired (76.82% : N/A)
+41248830 + 0 with itself and mate mapped
+612949 + 0 singletons (1.23% : N/A)
+303006 + 0 with mate mapped to a different chr
+85379 + 0 with mate mapped to a different chr (mapQ>=5)
+
+ven 16 ago 2024, 12:21:37, CEST
+Calling variants
+
+ven 16 ago 2024, 12:41:33, CEST
+
+Time taken (elapsed): 4341 sec.
