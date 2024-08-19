@@ -88,7 +88,6 @@ bowtie2-build --threads $THREADS -q $REF_FILE $REF_FILE
 echo
 date
 echo "Running the aligner"
-# bowtie2 --threads $THREADS --reorder -x $REF_FILE -1 $READS1 -2 $READS2 | samtools sort --threads $THREADS -o $ACC.bowtie2.bam
 bowtie2 --threads $THREADS -x $REF_FILE -1 $READS1 -2 $READS2 | samtools sort --threads $THREADS -o $ACC.bowtie2.bam
 
 echo
