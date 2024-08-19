@@ -11,8 +11,8 @@ THREADS = 16
 rule all:
     input:
         igv_index_fai = expand('{ref_data_dir}/{ref_acc}/{ref_acc}.fna.gz.fai', ref_data_dir=REF_DATA_DIR, ref_acc=REF_ACC),
-        igv_index_gzi = expand('{ref_data_dir}/{ref_acc}/{ref_acc}.fna.gz.gzi', ref_data_dir=REF_DATA_DIR, ref_acc=REF_ACC)
-        bam_file = expand("{bam_dir}/{acc}-{ref_acc}.bowtie2.bam",acc=ACC, ref_acc=REF_ACC, bam_dir=BAM_DIR),
+        igv_index_gzi = expand('{ref_data_dir}/{ref_acc}/{ref_acc}.fna.gz.gzi', ref_data_dir=REF_DATA_DIR, ref_acc=REF_ACC),
+        bam_file = expand("{bam_dir}/{acc}-{ref_acc}.bowtie2.bam",acc=ACC, ref_acc=REF_ACC, bam_dir=BAM_DIR)
 
 rule download_reads:
     output:
