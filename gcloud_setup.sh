@@ -42,3 +42,9 @@ sudo apt install -y bowtie2
 # bcftools
 sudo apt install -y bcftools
 
+# spades 4
+wget https://github.com/ablab/spades/releases/download/v4.0.0/SPAdes-4.0.0-Linux.tar.gz
+tar xvf SPAdes-4.0.0-Linux.tar.gz
+mv SPAdes-4.0.0-Linux ~/.local/
+cd ~/.local/bin
+ln -s ../SPAdes-4.0.0-Linux/bin/* .
