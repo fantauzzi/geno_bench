@@ -1,0 +1,8 @@
+ACC: 'SRR5512131'
+REF_ACC: 'GCF_000006925.2'
+SRA_DIR: 'sra'
+FASTQ_DIR: 'fastq'
+REFS_DIR: 'refs'
+REF_DATA_DIR: 'refs/ncbi_dataset/data'
+BAM_DIR: 'bam'
+THREADS: 16
