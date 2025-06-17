@@ -1,0 +1,110 @@
+configfile: 'config.yaml'
+locals().update(config)
+REF_FILENAME = f'refs/{REF_ACC}.zip'
+
+rule all:
+    input:
+        f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz.fai',
+        f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz.gzi',
+        f'{BAM_DIR}/{ACC}-{REF_ACC}.bowtie2.bam'
+
+rule clean:
+    params:
+        dirs = ["bam", "fastq", "refs", "sra"]
+    shell:
+        "rm -rf {params.dirs}"
+
+rule download_reads:
+    output:
+        sra = f'{SRA_DIR}/{ACC}/{ACC}.sra'
+    log:
+        "logs/download_reads.log"
+    shell:
+        "prefetch -v {ACC} -O {SRA_DIR} > {log} 2>&1"
+
+rule convert_sra_to_fastq:
+    input:
+        sra = rules.download_reads.output.sra
+    output:
+        fastq1 = f'{FASTQ_DIR}/{ACC}_1.fastq',
+        fastq2 = f'{FASTQ_DIR}/{ACC}_2.fastq'
+    log:
+        "logs/convert_sra.log"
+    shell:
+        "fasterq-dump -v -O {FASTQ_DIR} --split-files {input.sra} > {log} 2>&1"
+
+rule compress_fastq:
+    input:
+        f'{FASTQ_DIR}/{ACC}_{{pair}}.fastq'
+    output:
+        f'{FASTQ_DIR}/{ACC}_{{pair}}.fastq.gz'
+    log:
+        "logs/compress_fastq_{wildcards.pair}.log"
+    shell:
+        "bgzip -@ {THREADS} {input}; seqkit stats -j {THREADS} {output} > {log} 2>&1"
+
+rule download_ref_genome:
+    output:
+        ref = f'{REF_FILENAME}'
+    params:
+        dataset_cmd = "datasets download genome accession"
+    log:
+        "logs/download_ref_genome.log"
+    shell:
+        "{params.dataset_cmd} {REF_ACC} --filename {output.ref} > {log} 2>&1"
+
+rule unzip_ref_genome:
+    output:
+        fna_file = f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna'
+    input:
+        rules.download_ref_genome.output.ref
+    log:
+        "logs/unzip_ref.log"
+    shell:
+        "unzip -u {input} -d {REFS_DIR}; mv $(ls {REF_DATA_DIR}/{REF_ACC}/{REF_ACC}*.fna) {output.fna_file} > {log} 2>&1"
+
+rule bgzip_fna:
+    input:
+        rules.unzip_ref_genome.output.fna_file
+    output:
+        f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz'
+    log:
+        "logs/bgzip_fna.log"
+    shell:
+        "bgzip -f -@ {THREADS} {input} > {log} 2>&1"
+
+rule index_reference_for_igv:
+    input:
+        rules.bgzip_fna.output
+    output:
+        expand("{input}.{{fai,gzi}}")
+    log:
+        "logs/index_igv.log"
+    shell:
+        "samtools faidx {input} > {log} 2>&1"
+
+rule index_reference_for_bowtie2:
+    input:
+        rules.bgzip_fna.output
+    output:
+        expand("{input}.{{1,2,3,4,rev.1,rev.2}}.bt2")
+    log:
+        "logs/index_bowtie2.log"
+    shell:
+        "bowtie2-build --threads {THREADS} -q {input} {input} > {log} 2>&1"
+
+rule align_reads:
+    input:
+        ref = rules.bgzip_fna.output,
+        index = rules.index_reference_for_bowtie2.output,
+        fastq1 = rules.compress_fastq.output.format(pair=1),
+        fastq2 = rules.compress_fastq.output.format(pair=2)
+    output:
+        bam = f'{BAM_DIR}/{ACC}-{REF_ACC}.bowtie2.bam'
+    log:
+        "logs/align_reads.log"
+    shell:
+        """
+        bowtie2 --threads {THREADS} -x {input.ref} -1 {input.fastq1} -2 {input.fastq2} |
+        samtools sort --threads {THREADS} -o {output.bam} > {log} 2>&1
+        """

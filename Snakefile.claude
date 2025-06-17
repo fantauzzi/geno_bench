@@ -1,0 +1,127 @@
+configfile: 'config.yaml'
+
+# Extract variables from config properly
+REF_ACC = config['REF_ACC']
+ACC = config['ACC']
+REF_DATA_DIR = config['REF_DATA_DIR']
+SRA_DIR = config['SRA_DIR']
+FASTQ_DIR = config['FASTQ_DIR']
+BAM_DIR = config['BAM_DIR']
+REFS_DIR = config['REFS_DIR']
+THREADS = config['THREADS']
+
+# Use consistent variable definition
+REF_FILENAME = f'refs/{REF_ACC}.zip'
+
+rule all:
+    input:
+        f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz.fai',
+        f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz.gzi',
+        f'{BAM_DIR}/{ACC}-{REF_ACC}.bowtie2.bam'
+
+rule clean:
+    shell:
+        'rm -rf {BAM_DIR} {FASTQ_DIR} {REFS_DIR} {SRA_DIR}'
+
+rule download_reads:
+    output:
+        sra = f'{SRA_DIR}/{ACC}/{ACC}.sra'
+    params:
+        outdir = SRA_DIR
+    shell:
+        "prefetch -v {ACC} -O {params.outdir}"
+
+rule convert_sra_to_fastq:
+    input:
+        sra = rules.download_reads.output.sra
+    output:
+        fastq1 = f'{FASTQ_DIR}/{ACC}_1.fastq',
+        fastq2 = f'{FASTQ_DIR}/{ACC}_2.fastq'
+    params:
+        outdir = FASTQ_DIR
+    shell:
+        "fasterq-dump -v -O {params.outdir} --split-files {input.sra}"
+
+rule compress_fastq1_file:
+    input:
+        fastq1 = rules.convert_sra_to_fastq.output.fastq1
+    output:
+        fastq1_gz = f'{FASTQ_DIR}/{ACC}_1.fastq.gz'
+    log:
+        stats = f"logs/{ACC}_1_stats.log"
+    shell:
+        "bgzip -@ {THREADS} {input.fastq1} && "
+        "seqkit stats -j {THREADS} {output.fastq1_gz} > {log.stats}"
+
+rule compress_fastq2_file:
+    input:
+        fastq2 = rules.convert_sra_to_fastq.output.fastq2
+    output:
+        fastq2_gz = f'{FASTQ_DIR}/{ACC}_2.fastq.gz'
+    log:
+        stats = f"logs/{ACC}_2_stats.log"
+    shell:
+        "bgzip -@ {THREADS} {input.fastq2} && "
+        "seqkit stats -j {THREADS} {output.fastq2_gz} > {log.stats}"
+
+rule download_ref_genome:
+    output:
+        ref = REF_FILENAME
+    shell:
+        "datasets download genome accession {REF_ACC} --filename {output.ref}"
+
+rule unzip_ref_genome:
+    input:
+        ref = rules.download_ref_genome.output.ref
+    output:
+        fna_file = f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna'
+    params:
+        output_dir = REFS_DIR,
+        ref_dir = f'{REF_DATA_DIR}/{REF_ACC}'
+    shell:
+        "unzip -u {input.ref} -d {params.output_dir} && "
+        'mv "$(ls {params.ref_dir}/{REF_ACC}*.fna)" {output.fna_file}'
+
+rule bgzip_fna:
+    input:
+        fna = rules.unzip_ref_genome.output.fna_file
+    output:
+        bgzipped = f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz'
+    shell:
+        "bgzip -f -@ {THREADS} {input.fna}"
+
+rule index_reference_for_igv:
+    input:
+        bgzipped = rules.bgzip_fna.output.bgzipped
+    output:
+        fai = f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz.fai',
+        gzi = f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz.gzi'
+    shell:
+        'samtools faidx {input.bgzipped}'
+
+rule index_reference_for_bowtie2:
+    input:
+        bgzipped = rules.bgzip_fna.output.bgzipped
+    output:
+        expand(f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz.{{suffix}}.bt2',
+               suffix=['1', '2', '3', '4', 'rev.1', 'rev.2'])
+    params:
+        index_prefix = f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz'
+    shell:
+        'bowtie2-build --threads {THREADS} -q {input.bgzipped} {params.index_prefix}'
+
+rule align_reads:
+    input:
+        reference = rules.bgzip_fna.output.bgzipped,
+        index = rules.index_reference_for_bowtie2.output,
+        fastq1 = rules.compress_fastq1_file.output.fastq1_gz,
+        fastq2 = rules.compress_fastq2_file.output.fastq2_gz
+    output:
+        bam = f'{BAM_DIR}/{ACC}-{REF_ACC}.bowtie2.bam'
+    params:
+        index_prefix = f'{REF_DATA_DIR}/{REF_ACC}/{REF_ACC}.fna.gz'
+    log:
+        f"logs/{ACC}-{REF_ACC}.bowtie2.log"
+    shell:
+        'bowtie2 --threads {THREADS} -x {params.index_prefix} -1 {input.fastq1} -2 {input.fastq2} 2> {log} | '
+        'samtools sort --threads {THREADS} -o {output.bam}'
